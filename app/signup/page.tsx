@@ -1,0 +1,80 @@
+'use client'
+
+import { useState } from 'react'
+import Link from 'next/link'
+import { signup } from '@/app/actions/auth'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+
+export default function SignupPage() {
+  const [error, setError] = useState<string | null>(null)
+  const [loading, setLoading] = useState(false)
+
+  async function handleSubmit(formData: FormData) {
+    setLoading(true)
+    setError(null)
+    const result = await signup(formData)
+    if (result?.error) {
+      setError(result.error)
+      setLoading(false)
+    }
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+      <Card className="w-full max-w-md">
+        <CardHeader className="space-y-1">
+          <CardTitle className="text-2xl font-bold text-center">Create Account</CardTitle>
+          <CardDescription className="text-center">
+            Get started with CBSE Exam Formatter
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form action={handleSubmit} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="you@example.com"
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="password">Password</Label>
+              <Input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="••••••••"
+                required
+                minLength={6}
+              />
+            </div>
+            {error && (
+              <div className="text-sm text-red-600 bg-red-50 p-3 rounded">
+                {error}
+              </div>
+            )}
+            <Button 
+              type="submit" 
+              className="w-full bg-indigo-600 hover:bg-indigo-700"
+              disabled={loading}
+            >
+              {loading ? 'Creating account...' : 'Create Account'}
+            </Button>
+          </form>
+          <div className="mt-4 text-center text-sm">
+            Already have an account?{' '}
+            <Link href="/login" className="text-indigo-600 hover:underline font-semibold">
+              Sign in
+            </Link>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  )
+}
