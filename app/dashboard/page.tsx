@@ -21,11 +21,11 @@ export default async function Dashboard() {
     .order('created_at', { ascending: false })
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100">
       <nav className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
-            <h1 className="text-2xl font-bold text-indigo-600">CBSE Exam Formatter</h1>
+            <h1 className="text-2xl font-bold text-indigo-600">Trak Crak</h1>
             <div className="flex items-center gap-4">
               <span className="text-sm text-gray-600">{user.email}</span>
               <form action={signout}>

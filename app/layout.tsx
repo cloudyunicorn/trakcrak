@@ -5,7 +5,7 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'CBSE Math Exam Formatter',
+  title: 'Trak Crak',
   description: 'Create professional CBSE Class 10 Mathematics board exams',
 }
 
